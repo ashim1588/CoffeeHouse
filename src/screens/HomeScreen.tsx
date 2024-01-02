@@ -1,11 +1,15 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {useState} from 'react';
 import {useStore} from '../store/store';
+import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
+import {COLORS} from '../theme/theme';
+import {StatusBar} from 'react-native';
+import HeaderBar from '../components/HeaderBar';
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
   for (let i = 0; i < data.length; i++) {
-    if (temp[data[i].name] == undefined) {
+    if (temp[data[i].name] === undefined) {
       temp[data[i].name] = 1;
     } else {
       temp[data[i].name]++;
@@ -39,13 +43,29 @@ const HomeScreen = () => {
   const [sortedCoffee, setSortedCoffee] = useState(
     getCoffeList(categoryIndex.category, CoffeeList),
   );
+
+  const tabBarHeight = useBottomTabBarHeight();
   return (
-    <View>
-      <Text>HomeScreen</Text>
+    <View style={styles.ScreenContainer}>
+      <StatusBar backgroundColor={COLORS.primaryBlackHex} />
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.ScrollviewFlex}>
+        {/* App Header */}
+        <HeaderBar />
+      </ScrollView>
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  ScreenContainer: {
+    flex: 1,
+    backgroundColor: COLORS.primaryBlackHex,
+  },
+  ScrollviewFlex: {
+    flexGrow: 1,
+  },
+});
 
 export default HomeScreen;
