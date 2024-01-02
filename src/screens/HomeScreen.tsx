@@ -16,6 +16,14 @@ const getCategoriesFromData = (data: any) => {
   return categories;
 };
 
+const getCoffeList = (category: string, data: any) => {
+  if (category == 'All') {
+    return data;
+  } else {
+    let coffelist = data.filter((item: any) => item.name == category);
+  }
+};
+
 const HomeScreen = () => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeansList = useStore((state: any) => state.BeansList);
@@ -28,7 +36,9 @@ const HomeScreen = () => {
     index: 0,
     category: categories[0],
   });
-  const [sortedCoffee, setSortedCoffee] = useState(undefined);
+  const [sortedCoffee, setSortedCoffee] = useState(
+    getCoffeList(categoryIndex.category, CoffeeList),
+  );
   return (
     <View>
       <Text>HomeScreen</Text>
