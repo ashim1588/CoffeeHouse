@@ -1,4 +1,5 @@
 import {
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -19,6 +20,7 @@ import {
 import {StatusBar} from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import CustomIcon from '../components/CustomIcon';
+import CoffeeCard from '../components/CoffeeCard';
 
 const getCategoriesFromData = (data: any) => {
   let temp: any = {};
@@ -105,7 +107,9 @@ const HomeScreen = () => {
                 style={styles.CategoryScrollViewItem}
                 onPress={() => {
                   setCategoryIndex({index: index, category: categories[index]});
-                  setSortedCoffee(getCoffeList(categories[index], CoffeeList));
+                  setSortedCoffee([
+                    ...getCoffeList(categories[index], CoffeeList),
+                  ]);
                 }}>
                 <Text
                   style={[
@@ -125,6 +129,23 @@ const HomeScreen = () => {
             </View>
           ))}
         </ScrollView>
+        {/* Coffee Flatlist */}
+
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={sortedCoffee}
+          contentContainerStyle={styles.FlatListContainer}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => {
+            return (
+              <TouchableOpacity>
+                <CoffeeCard />
+              </TouchableOpacity>
+            );
+          }}
+        />
+        {/* Beans Flatlist */}
       </ScrollView>
     </View>
   );
@@ -182,6 +203,11 @@ const styles = StyleSheet.create({
     width: SPACING.space_10,
     borderRadius: BORDERRADIUS.radius_10,
     backgroundColor: COLORS.primaryOrangeHex,
+  },
+  FlatListContainer: {
+    gap: SPACING.space_20,
+    paddingVertical: SPACING.space_20,
+    paddingHorizontal: SPACING.space_30,
   },
 });
 
