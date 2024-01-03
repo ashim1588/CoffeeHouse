@@ -9,7 +9,13 @@ import {
 import React, {useState} from 'react';
 import {useStore} from '../store/store';
 import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
-import {BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import {
+  BORDERRADIUS,
+  COLORS,
+  FONTFAMILY,
+  FONTSIZE,
+  SPACING,
+} from '../theme/theme';
 import {StatusBar} from 'react-native';
 import HeaderBar from '../components/HeaderBar';
 import CustomIcon from '../components/CustomIcon';
@@ -32,7 +38,7 @@ const getCoffeList = (category: string, data: any) => {
   if (category == 'All') {
     return data;
   } else {
-    let coffelist = data.filter((item: any) => item.name == category);
+    return data.filter((item: any) => item.name == category);
   }
 };
 
@@ -86,6 +92,39 @@ const HomeScreen = () => {
         </View>
 
         {/* Category Scroller */}
+
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.CategoryScrollView}>
+          {categories.map((data, index) => (
+            <View
+              key={index.toString()}
+              style={styles.CategoryScrollViewContainer}>
+              <TouchableOpacity
+                style={styles.CategoryScrollViewItem}
+                onPress={() => {
+                  setCategoryIndex({index: index, category: categories[index]});
+                  setSortedCoffee(getCoffeList(categories[index], CoffeeList));
+                }}>
+                <Text
+                  style={[
+                    styles.CategoryText,
+                    categoryIndex.index === index
+                      ? {color: COLORS.primaryOrangeHex}
+                      : {},
+                  ]}>
+                  {data}
+                </Text>
+                {categoryIndex.index === index ? (
+                  <View style={styles.ActiveCategory} />
+                ) : (
+                  <></>
+                )}
+              </TouchableOpacity>
+            </View>
+          ))}
+        </ScrollView>
       </ScrollView>
     </View>
   );
@@ -121,6 +160,28 @@ const styles = StyleSheet.create({
     fontFamily: FONTFAMILY.poppins_medium,
     fontSize: FONTSIZE.size_14,
     color: COLORS.primaryWhiteHex,
+  },
+  CategoryScrollView: {
+    paddingHorizontal: SPACING.space_20,
+    marginBottom: SPACING.space_20,
+  },
+  CategoryScrollViewContainer: {
+    paddingHorizontal: SPACING.space_15,
+  },
+  CategoryScrollViewItem: {
+    alignItems: 'center',
+  },
+  CategoryText: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_16,
+    color: COLORS.primaryLightGreyHex,
+    marginBottom: SPACING.space_4,
+  },
+  ActiveCategory: {
+    height: SPACING.space_10,
+    width: SPACING.space_10,
+    borderRadius: BORDERRADIUS.radius_10,
+    backgroundColor: COLORS.primaryOrangeHex,
   },
 });
 
