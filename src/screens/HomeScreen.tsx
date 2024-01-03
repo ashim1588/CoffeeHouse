@@ -140,7 +140,18 @@ const HomeScreen = () => {
           renderItem={({item}) => {
             return (
               <TouchableOpacity>
-                <CoffeeCard />
+                <CoffeeCard
+                  id={item.id}
+                  index={item.index}
+                  type={item.type}
+                  rosted={item.roasted}
+                  imagelink_square={item.imagelink_square}
+                  name={item.name}
+                  special_ingredient={item.special_ingredient}
+                  average_rating={item.average_rating}
+                  price={item.prices[2]}
+                  buttonPressHandler={() => {}}
+                />
               </TouchableOpacity>
             );
           }}
