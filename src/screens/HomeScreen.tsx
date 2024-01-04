@@ -101,16 +101,21 @@ const HomeScreen = () => {
         <Text style={styles.ScreenTitle}>Find the best{'\n'}coffe for you</Text>
         {/* Search Input */}
         <View style={styles.InputContainerComponent}>
-          <CustomIcon
-            style={styles.InputIcon}
-            name="search"
-            size={FONTSIZE.size_18}
-            color={
-              searchText.length > 0
-                ? COLORS.primaryOrangeHex
-                : COLORS.primaryLightGreyHex
-            }
-          />
+          <TouchableOpacity
+            onPress={() => {
+              searchCoffee(searchText);
+            }}>
+            <CustomIcon
+              style={styles.InputIcon}
+              name="search"
+              size={FONTSIZE.size_18}
+              color={
+                searchText.length > 0
+                  ? COLORS.primaryOrangeHex
+                  : COLORS.primaryLightGreyHex
+              }
+            />
+          </TouchableOpacity>
           <TextInput
             placeholder="Find Your Coffe..."
             value={searchText}
