@@ -71,9 +71,31 @@ export const useStore = create(
           }),
         ),
       addToFavoriteList: (type: string, id: string) =>
-        set(produce(state => {
-          
-        })),
+        set(
+          produce(state => {
+            if (type === 'Coffee') {
+              for (let i = 0; i < state.CoffeeList.length; i++) {
+                if (state.CoffeeList[i].id === id) {
+                  if (state.CoffeeList[i].favourite === false) {
+                    state.CoffeeList[i].favourite = true;
+                    state.FavoritesList.unshift(state.CoffeeList[i]);
+                  }
+                  break;
+                }
+              }
+            } else if (type === 'Bean') {
+              for (let i = 0; i < state.BeansList.length; i++) {
+                if (state.BeansList[i].id === id) {
+                  if (state.BeansList[i].favourite === false) {
+                    state.BeansList[i].favourite = true;
+                    state.BeansList.unshift(state.BeansList[i]);
+                  }
+                  break;
+                }
+              }
+            }
+          }),
+        ),
     }),
     {
       name: 'coffe-app',
