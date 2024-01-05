@@ -96,6 +96,38 @@ export const useStore = create(
             }
           }),
         ),
+      deleteFromFavoriteList: (type: string, id: string) =>
+        set(
+          produce(state => {
+            if (type === 'Coffee') {
+              for (let i = 0; i < state.CoffeeList.length; i++) {
+                if (state.CoffeeList[i].id === id) {
+                  if (state.CoffeeList[i].favourite === true) {
+                    state.CoffeeList[i].favourite = false;
+                  }
+                  break;
+                }
+              }
+            } else if (type === 'Bean') {
+              for (let i = 0; i < state.BeansList.length; i++) {
+                if (state.BeansList[i].id === id) {
+                  if (state.BeansList[i].favourite === true) {
+                    state.BeansList[i].favourite = false;
+                  }
+                  break;
+                }
+              }
+            }
+            let sliceIndex = -1;
+            for (let i = 0; i < state.FavoritesList.length; i++) {
+              if (state.FavoritesList[i].id === id) {
+                sliceIndex = i;
+                break;
+              }
+            }
+            state.FavoritesList.splice(sliceIndex, 1);
+          }),
+        ),
     }),
     {
       name: 'coffe-app',
