@@ -6,7 +6,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  TouchableOpacityBase,
   View,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
@@ -39,14 +38,14 @@ const getCategoriesFromData = (data: any) => {
 };
 
 const getCoffeList = (category: string, data: any) => {
-  if (category == 'All') {
+  if (category === 'All') {
     return data;
   } else {
-    return data.filter((item: any) => item.name == category);
+    return data.filter((item: any) => item.name === category);
   }
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}: any) => {
   const CoffeeList = useStore((state: any) => state.CoffeeList);
   const BeansList = useStore((state: any) => state.BeansList);
 
@@ -195,7 +194,10 @@ const HomeScreen = () => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.push('Details');
+                }}>
                 <CoffeeCard
                   id={item.id}
                   index={item.index}
