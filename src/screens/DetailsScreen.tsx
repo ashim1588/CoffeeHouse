@@ -3,6 +3,7 @@ import {
   StatusBar,
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
@@ -74,6 +75,25 @@ const DetailsScreen = ({navigation, route}: any) => {
               </Text>
             </TouchableWithoutFeedback>
           )}
+          <Text style={styles.InfoTitle}>Size</Text>
+          <View style={styles.SizeOuterContainer}>
+            {ItemofIndex.prices.map((data: any) => (
+              <TouchableOpacity key={data.size}>
+                <Text
+                  style={[
+                    styles.SizeText,
+                    {
+                      fontSize:
+                        ItemofIndex.type === 'bean'
+                          ? FONTSIZE.size_14
+                          : FONTSIZE.size_16,
+                    },
+                  ]}>
+                  {data.size}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
       </ScrollView>
     </View>
