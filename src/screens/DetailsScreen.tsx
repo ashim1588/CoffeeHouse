@@ -1,7 +1,14 @@
-import {ScrollView, StatusBar, StyleSheet, View} from 'react-native';
-import React from 'react';
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
+import React, {useState} from 'react';
 import {useStore} from '../store/store';
-import {COLORS} from '../theme/theme';
+import {COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
 import ImageBackgroundInfo from '../components/ImageBackgroundInfo';
 
 const DetailsScreen = ({navigation, route}: any) => {
@@ -13,6 +20,9 @@ const DetailsScreen = ({navigation, route}: any) => {
   const deleteFromFavoriteList = useStore(
     (state: any) => state.deleteFromFavoriteList,
   );
+
+  const [fullDesc, setFullDesc] = useState(false);
+
   const ToggleFavourite = (favourite: boolean, type: string, id: string) => {
     favourite ? deleteFromFavoriteList(type, id) : addToFavoriteList(type, id);
   };
@@ -42,6 +52,29 @@ const DetailsScreen = ({navigation, route}: any) => {
           BackHandler={BackHandler}
           ToggleFavourite={ToggleFavourite}
         />
+
+        <View style={styles.FooterInfoArea}>
+          <Text style={styles.InfoTitle}>Description</Text>
+          {fullDesc ? (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                setFullDesc(prev => !prev);
+              }}>
+              <Text style={styles.DescriptionText}>
+                {ItemofIndex.description}
+              </Text>
+            </TouchableWithoutFeedback>
+          ) : (
+            <TouchableWithoutFeedback
+              onPress={() => {
+                setFullDesc(prev => !prev);
+              }}>
+              <Text numberOfLines={3} style={styles.DescriptionText}>
+                {ItemofIndex.description}
+              </Text>
+            </TouchableWithoutFeedback>
+          )}
+        </View>
       </ScrollView>
     </View>
   );
@@ -54,6 +87,22 @@ const styles = StyleSheet.create({
   },
   ScrollViewFlex: {
     flexGrow: 1,
+  },
+  FooterInfoArea: {
+    padding: SPACING.space_20,
+  },
+  InfoTitle: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_16,
+    color: COLORS.primaryWhiteHex,
+    marginBottom: SPACING.space_10,
+  },
+  DescriptionText: {
+    letterSpacing: 0.5,
+    fontFamily: FONTFAMILY.poppins_regular,
+    fontSize: FONTSIZE.size_14,
+    color: COLORS.primaryWhiteHex,
+    marginBottom: SPACING.space_30,
   },
 });
 
