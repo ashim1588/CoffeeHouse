@@ -28,7 +28,8 @@ const DetailsScreen = ({navigation, route}: any) => {
   const deleteFromFavoriteList = useStore(
     (state: any) => state.deleteFromFavoriteList,
   );
-
+  const addToCart = useStore((state: any) => state.addToCart);
+  const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
   const [price, setPrice] = useState(ItemofIndex.prices[0]);
   const [fullDesc, setFullDesc] = useState(false);
 
@@ -38,6 +39,31 @@ const DetailsScreen = ({navigation, route}: any) => {
 
   const BackHandler = () => {
     navigation.pop();
+  };
+
+  const addToCartHandler = ({
+    id,
+    index,
+    name,
+    roasted,
+    imagelink_square,
+    special_ingredient,
+    type,
+    // eslint-disable-next-line @typescript-eslint/no-shadow
+    price,
+  }: any) => {
+    addToCart({
+      id,
+      index,
+      name,
+      roasted,
+      imagelink_square,
+      special_ingredient,
+      type,
+      prices: [{...price, quantity: 1}],
+    });
+    calculateCartPrice();
+    navigation.navigate('Cart');
   };
 
   return (
@@ -123,7 +149,18 @@ const DetailsScreen = ({navigation, route}: any) => {
         <PaymentFooter
           price={price}
           buttonTitle="Add To Cart"
-          buttonPressHandler={() => {}}
+          buttonPressHandler={() =>
+            addToCartHandler({
+              id: ItemofIndex.id,
+              index: ItemofIndex.index,
+              name: ItemofIndex.name,
+              roasted: ItemofIndex.roasted,
+              imagelinke_square: ItemofIndex.imagelink_square,
+              special_ingredient: ItemofIndex.special_ingredient,
+              type: ItemofIndex.type,
+              price: price,
+            })
+          }
         />
       </ScrollView>
     </View>
@@ -137,6 +174,7 @@ const styles = StyleSheet.create({
   },
   ScrollViewFlex: {
     flexGrow: 1,
+    justifyContent: 'space-between',
   },
   FooterInfoArea: {
     padding: SPACING.space_20,
