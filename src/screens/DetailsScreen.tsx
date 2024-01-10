@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStore} from '../store/store';
-import {COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import {BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
 import ImageBackgroundInfo from '../components/ImageBackgroundInfo';
 
 const DetailsScreen = ({navigation, route}: any) => {
@@ -22,6 +22,7 @@ const DetailsScreen = ({navigation, route}: any) => {
     (state: any) => state.deleteFromFavoriteList,
   );
 
+  const [price, setPrice] = useState(ItemofIndex.prices[0]);
   const [fullDesc, setFullDesc] = useState(false);
 
   const ToggleFavourite = (favourite: boolean, type: string, id: string) => {
@@ -78,7 +79,20 @@ const DetailsScreen = ({navigation, route}: any) => {
           <Text style={styles.InfoTitle}>Size</Text>
           <View style={styles.SizeOuterContainer}>
             {ItemofIndex.prices.map((data: any) => (
-              <TouchableOpacity key={data.size}>
+              <TouchableOpacity
+                onPress={() => {
+                  setPrice(data);
+                }}
+                key={data.size}
+                style={[
+                  styles.SizeBox,
+                  {
+                    borderColor:
+                      data.size === price.size
+                        ? COLORS.primaryOrangeHex
+                        : COLORS.primaryDarkGreyHex,
+                  },
+                ]}>
                 <Text
                   style={[
                     styles.SizeText,
@@ -87,6 +101,10 @@ const DetailsScreen = ({navigation, route}: any) => {
                         ItemofIndex.type === 'bean'
                           ? FONTSIZE.size_14
                           : FONTSIZE.size_16,
+                      color:
+                        data.size === price.size
+                          ? COLORS.primaryOrangeHex
+                          : COLORS.primaryLightGreyHex,
                     },
                   ]}>
                   {data.size}
@@ -123,6 +141,24 @@ const styles = StyleSheet.create({
     fontSize: FONTSIZE.size_14,
     color: COLORS.primaryWhiteHex,
     marginBottom: SPACING.space_30,
+  },
+  SizeOuterContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    gap: SPACING.space_20,
+  },
+  SizeBox: {
+    flex: 1,
+    backgroundColor: COLORS.primaryDarkGreyHex,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: SPACING.space_24 * 2,
+    borderRadius: BORDERRADIUS.radius_10,
+    borderWidth: 2,
+  },
+  SizeText: {
+    fontFamily: FONTFAMILY.poppins_medium,
   },
 });
 
