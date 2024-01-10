@@ -9,8 +9,15 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {useStore} from '../store/store';
-import {BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import {
+  BORDERRADIUS,
+  COLORS,
+  FONTFAMILY,
+  FONTSIZE,
+  SPACING,
+} from '../theme/theme';
 import ImageBackgroundInfo from '../components/ImageBackgroundInfo';
+import PaymentFooter from '../components/PaymentFooter';
 
 const DetailsScreen = ({navigation, route}: any) => {
   const ItemofIndex = useStore((state: any) =>
@@ -113,6 +120,11 @@ const DetailsScreen = ({navigation, route}: any) => {
             ))}
           </View>
         </View>
+        <PaymentFooter
+          price={price}
+          buttonTitle="Add To Cart"
+          buttonPressHandler={() => {}}
+        />
       </ScrollView>
     </View>
   );
