@@ -1,4 +1,11 @@
-import {Image, ImageProps, StyleSheet, Text, View} from 'react-native';
+import {
+  Image,
+  ImageProps,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -8,6 +15,7 @@ import {
   FONTSIZE,
   SPACING,
 } from '../theme/theme';
+import CustomIcon from './CustomIcon';
 
 interface CartItemProps {
   id: string;
@@ -67,6 +75,39 @@ const CartItem: React.FC<CartItemProps> = ({
                     {data.size}
                   </Text>
                 </View>
+                <Text style={styles.SizeCurrency}>
+                  {data.currency}
+                  <Text style={styles.SizePrice}> {data.price}</Text>
+                </Text>
+              </View>
+              <View style={styles.CartItemSizeValueContainer}>
+                <TouchableOpacity
+                  style={styles.CartItemIcon}
+                  onPress={() => {
+                    decrementCartItemQuantityHandler(id, data.size);
+                  }}>
+                  <CustomIcon
+                    name="minus"
+                    color={COLORS.primaryWhiteHex}
+                    size={FONTSIZE.size_10}
+                  />
+                </TouchableOpacity>
+                <View style={styles.CartItemQuantityContainer}>
+                  <Text style={styles.CartItemQuantityText}>
+                    {data.quantity}
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={styles.CartItemIcon}
+                  onPress={() => {
+                    incrementCartItemQuantityHandler(id, data.size);
+                  }}>
+                  <CustomIcon
+                    name="add"
+                    color={COLORS.primaryWhiteHex}
+                    size={FONTSIZE.size_10}
+                  />
+                </TouchableOpacity>
               </View>
             </View>
           ))}
@@ -147,6 +188,33 @@ const styles = StyleSheet.create({
   SizeText: {
     fontFamily: FONTFAMILY.poppins_medium,
     color: COLORS.secondaryLightGreyHex,
+  },
+  SizeCurrency: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_18,
+    color: COLORS.primaryOrangeHex,
+  },
+  SizePrice: {
+    color: COLORS.primaryWhiteHex,
+  },
+  CartItemIcon: {
+    backgroundColor: COLORS.primaryOrangeHex,
+    padding: SPACING.space_12,
+    borderRadius: BORDERRADIUS.radius_10,
+  },
+  CartItemQuantityContainer: {
+    backgroundColor: COLORS.primaryBlackHex,
+    width: 60,
+    borderRadius: BORDERRADIUS.radius_10,
+    borderWidth: 2,
+    borderColor: COLORS.primaryOrangeHex,
+    alignItems: 'center',
+    paddingVertical: SPACING.space_4,
+  },
+  CartItemQuantityText: {
+    fontFamily: FONTFAMILY.poppins_semibold,
+    fontSize: FONTSIZE.size_16,
+    color: COLORS.primaryWhiteHex,
   },
 });
 
