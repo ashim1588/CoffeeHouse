@@ -30,6 +30,16 @@ const CartScreen = ({navigation, route}: any) => {
     navigation.push('Payment');
   };
 
+  const incrementCartItemQuantityHandler = (id: string, size: string) => {
+    incrementCartItemQuantity(id, size);
+    calculateCartPrice();
+  };
+
+  const decrementCartItemQuantityHandler = (id: string, size: string) => {
+    decrementCartItemQuantity(id, size);
+    calculateCartPrice();
+  };
+
   return (
     <View style={styles.ScreenContainer}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
@@ -45,7 +55,15 @@ const CartScreen = ({navigation, route}: any) => {
             ) : (
               <View style={styles.ListItemContainer}>
                 {CartList.map((data: any) => (
-                  <TouchableOpacity onPress={() => {}} key={data.id}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      navigation.push('Details', {
+                        index: data.index,
+                        id: data.id,
+                        type: data.type,
+                      });
+                    }}
+                    key={data.id}>
                     <CartItem
                       id={data.id}
                       name={data.name}
@@ -55,10 +73,10 @@ const CartScreen = ({navigation, route}: any) => {
                       prices={data.prices}
                       type={data.type}
                       incrementCartItemQuantityHandler={
-                        incrementCartItemQuantity
+                        incrementCartItemQuantityHandler
                       }
                       decrementCartItemQuantityHandler={
-                        decrementCartItemQuantity
+                        decrementCartItemQuantityHandler
                       }
                     />
                   </TouchableOpacity>
