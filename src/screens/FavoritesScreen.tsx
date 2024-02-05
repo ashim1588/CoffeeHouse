@@ -11,6 +11,7 @@ import {useBottomTabBarHeight} from '@react-navigation/bottom-tabs';
 import {COLORS, SPACING} from '../theme/theme';
 import EmptyListAnimation from '../components/EmptyListAnimation';
 import HeaderBar from '../components/HeaderBar';
+import FavouritesItemCard from '../components/FavouritesItemCard';
 
 const FavoritesScreen = ({navigation}: any) => {
   const FavouritesList = useStore((state: any) => state.FavoritesList);
@@ -46,7 +47,7 @@ const FavoritesScreen = ({navigation}: any) => {
                       });
                     }}
                     key={data.id}>
-                    <View />
+                    <FavouritesItemCard />
                   </TouchableOpacity>
                 ))}
               </View>
