@@ -55,11 +55,20 @@ const PaymentScreen = () => {
         </View>
 
         <View style={styles.PaymentOptionsContainer}>
-          {PaymentList.map((data: any) => {
-            <TouchableOpacity>
-              <PaymentMethod />
-            </TouchableOpacity>;
-          })}
+          {PaymentList.map((data: any) => (
+            <TouchableOpacity
+              key={data.name}
+              onPress={() => {
+                setPaymentMode(data.name);
+              }}>
+              <PaymentMethod
+                paymentMode={paymentMode}
+                name={data.name}
+                icon={data.icon}
+                isIcon={data.isIcon}
+              />
+            </TouchableOpacity>
+          ))}
         </View>
       </ScrollView>
     </View>
