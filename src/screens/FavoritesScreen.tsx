@@ -49,7 +49,7 @@ const FavoritesScreen = ({navigation}: any) => {
                     key={data.id}>
                     <FavouritesItemCard
                       id={data.id}
-                      imagelink_square={data.imagelink_square}
+                      imagelink_portrait={data.imagelink_portrait}
                       name={data.name}
                       special_ingredient={data.special_ingredient}
                       type={data.type}
