@@ -7,12 +7,20 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import {BORDERRADIUS, COLORS, FONTFAMILY, FONTSIZE, SPACING} from '../theme/theme';
+import {
+  BORDERRADIUS,
+  COLORS,
+  FONTFAMILY,
+  FONTSIZE,
+  SPACING,
+} from '../theme/theme';
 import GradientBGIcon from '../components/GradientBGIcon';
 import PaymentMethod from '../components/PaymentMethod';
 import PaymentFooter from '../components/PaymentFooter';
 import LinearGradient from 'react-native-linear-gradient';
 import CustomIcon from '../components/CustomIcon';
+import {useStore} from '../store/store';
+import PopupAnimation from '../components/PopupAnimation';
 
 const PaymentList = [
   {
@@ -38,12 +46,34 @@ const PaymentList = [
 ];
 
 const PaymentScreen = ({navigation, route}: any) => {
-  const [paymentMode, setPaymentMode] = useState('Credit Card');
+  const calculateCartPrice = useStore((state: any) => state.calculateCartPrice);
+  const addToOrderHistoryListFromCart = useStore(
+    (state: any) => state.addToOrderHistoryListFromCart,
+  );
 
-  const buttonPressHandler = () => {};
+  const [paymentMode, setPaymentMode] = useState('Credit Card');
+  const [showAnimation, setShowAnimation] = useState(false);
+
+  const buttonPressHandler = () => {
+    setShowAnimation(true);
+    addToOrderHistoryListFromCart();
+    calculateCartPrice();
+    setTimeout(() => {
+      setShowAnimation(false);
+      navigation.navigate('History');
+    }, 2000);
+  };
   return (
     <View style={styles.ScreenContainer}>
       <StatusBar backgroundColor={COLORS.primaryBlackHex} />
+      {showAnimation ? (
+        <PopupAnimation
+          style={styles.LottieAnimation}
+          source={require('../lottie/successful.json')}
+        />
+      ) : (
+        <></>
+      )}
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.ScrollViewFlex}>
@@ -146,6 +176,9 @@ const styles = StyleSheet.create({
   ScreenContainer: {
     flex: 1,
     backgroundColor: COLORS.primaryBlackHex,
+  },
+  LottieAnimation: {
+    flex: 1,
   },
   ScrollViewFlex: {
     flexGrow: 1,
