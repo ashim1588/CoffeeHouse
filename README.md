@@ -1,79 +1,91 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# CoffeeHouse ☕️
 
-# Getting Started
+**CoffeeHouse** is a modern, user-friendly mobile application for coffee enthusiasts built using React Native. It allows users to explore different types of coffee and coffee beans, add items to their cart, view order history, and much more. The app is powered by **Zustand** for state management and features **Lottie animations** for a smooth and engaging UI experience. The app runs on a serverless architecture.
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+## Features 🚀
 
-## Step 1: Start the Metro Server
+- **Home Screen**: 
+  - A search bar to quickly find your favorite coffee.
+  - Profile icon for easy access to account details.
+  - Two sections:
+    - Various types of coffee.
+    - Different coffee beans options.
+    
+- **Coffee Details Screen**: View detailed information about a selected coffee, including pricing and description.
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+- **Coffee Beans Screen**: Browse through different types of coffee beans available in the shop.
 
-To start Metro, run the following command from the _root_ of your React Native project:
+- **Cart Screen**: Add coffee and coffee beans to the cart, modify quantities, and proceed to checkout.
 
-```bash
-# using npm
-npm start
+- **Payments Screen**: Secure payment gateway for easy transactions.
 
-# OR using Yarn
-yarn start
-```
+- **Favorites Screen**: Save your favorite coffee and coffee beans for easy access.
 
-## Step 2: Start your Application
+- **Order History Screen**: View previous orders and reorder with ease.
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
+## Technologies Used 🛠️
 
-### For Android
+- **React Native**: A popular framework for building mobile applications using React.
+- **Zustand**: State management library used for maintaining application state.
+- **Lottie Animations**: Library used to implement animations for enhancing the user experience.
+- **Serverless Architecture**: The app runs on a serverless architecture, reducing complexity and maintenance.
 
-```bash
-# using npm
-npm run android
+## Installation 🔧
 
-# OR using Yarn
-yarn android
-```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/coffeehouse-app.git
 
-### For iOS
+2. Navigate to the project directory:
+   ```bash
+   cd coffeehouse-app
 
-```bash
-# using npm
-npm run ios
+3. Install the dependencies:
+   ```bash
+   npm install
+   #or
+   yarn install
 
-# OR using Yarn
-yarn ios
-```
+4. Run the app on an emulator or a physical device:
+   ```bash
+   npx react-native run-android   # For Android
+   npx react-native run-ios       # For iOS
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+## Screenshots 📸
+<div>
+<h4>Home Screen</h4>
+<img width="250" alt="Screenshot 2024-09-20 at 9 20 11 PM" src="https://github.com/user-attachments/assets/487561fe-e024-462e-a5fa-07c9c1493d71">
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+<h4>Coffee Details Screen</h4>
+<img width="257" alt="Screenshot 2024-09-20 at 9 20 40 PM" src="https://github.com/user-attachments/assets/3bed4207-ba79-47e2-ba1b-2e9c78ffda14">
 
-## Step 3: Modifying your App
+<h4>Coffee Beans Details Screen</h4>
+<img width="245" alt="Screenshot 2024-09-20 at 9 20 29 PM" src="https://github.com/user-attachments/assets/12c73d72-2acc-4b26-b717-f580be7ca614">
 
-Now that you have successfully run the app, let's modify it.
+<h4>Cart Screen</h4>
+<img width="244" alt="Screenshot 2024-09-20 at 9 20 51 PM" src="https://github.com/user-attachments/assets/02fa1b25-caae-4aeb-a8cf-041e1adef8bd">
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+<h4>Payment Screen</h4>
+<img width="262" alt="Screenshot 2024-09-20 at 9 20 57 PM" src="https://github.com/user-attachments/assets/bac9633a-f472-4e60-a5f6-47a5ebfa2c76">
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+<h4>Favorites Screen</h4>
+<img width="263" alt="Screenshot 2024-09-20 at 9 21 04 PM" src="https://github.com/user-attachments/assets/a8937980-f5d1-4064-b45a-6cd44ac167c5">
 
-## Congratulations! :tada:
+<h4>Order History Screen</h4>
+<img width="258" alt="Screenshot 2024-09-20 at 9 21 09 PM" src="https://github.com/user-attachments/assets/9703470b-e7e5-4e2d-a08a-6bbab4744972">
+</div>
 
-You've successfully run and modified your React Native App. :partying_face:
+## Contributing 🤝
 
-### Now what?
+We welcome contributions from the community! To contribute:
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+1. Fork the repository.
+2. Create a new branch (git checkout -b feature-branch).
+3. Make your changes.
+4. Commit and push your changes (git commit -m 'Add some feature').
+5. Submit a pull request.
+   
+Please ensure your code follows the style guide and is well documented.
 
-# Troubleshooting
-
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
-
-# Learn More
-
-To learn more about React Native, take a look at the following resources:
-
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## License 📄
+This project is licensed under the MIT License - see the LICENSE file for details.
